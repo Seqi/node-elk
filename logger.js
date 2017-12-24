@@ -12,7 +12,8 @@ let winstonGraylogOptions = {
     },
     processMeta: (meta) => {
         // This lets you transform the metadata before logging
-        console.log('Processing metadata: ', meta)
+        // This includes the static meta and added meta
+        return meta
     },
     graylog: {
         servers: [ { host: 'localhost', port: 12201 } ],
@@ -26,8 +27,12 @@ let winstonGraylogOptions = {
     }
 }
 
-winston.clear();
-winston.add(winston.transports.Console, { level: 'debug' })
-//winston.add(winstonGraylog, winstonGraylogOptions)
+winston.add(winston.transports.Console, { 
+    level: 'debug', 
+    colorize: true,
+    timestamp: true
+})
+
+winston.add(winstonGraylog, winstonGraylogOptions)
 
 module.exports = winston
