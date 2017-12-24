@@ -27,6 +27,9 @@ let winstonGraylogOptions = {
     }
 }
 
+// Clear the default transports
+winston.clear()
+
 winston.add(winston.transports.Console, { 
     level: 'debug', 
     colorize: true,
